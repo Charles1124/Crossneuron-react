@@ -9,7 +9,15 @@ export function Splash() {
     const navigate = useNavigate();
 
     useEffect(() => {
+
+        const seenSplash= localStorage.getItem('splash'); 
+        if(seenSplash){
+            navigate('login'); 
+            return; 
+        }
+
         const timer = setTimeout(() => {
+            localStorage.setItem('splash', 'true');
             navigate('/login');
         }, 5000);
         return () => clearTimeout(timer);

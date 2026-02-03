@@ -50,13 +50,16 @@ export function Login() {
         }
     } 
 
-    const handleGoogleLogin= async () => {
+    const handleGoogleLogin= async () => { 
+        const provider= googleProvider;
         try{
-            const result= await signInWithPopup(auth, googleProvider)
-            const user= result.user; 
-            alert(`Bienvenido ${user.displayName}`);
-        } catch(err){
-            setError(err);
+            const result= await signInWithPopup(auth, provider)
+            console.log(result)
+            
+            alert(`Bienvenido ${result.user.displayName}`); 
+            if(result.user) navigate('/home');
+        } catch(error){
+            setError("Error al iniciar sesión con Google");
         }
     }
 
@@ -129,7 +132,7 @@ export function Login() {
                 </div>
 
                 <div className='social-logins'>
-                    <button className='boton-google'><img src="/gmail.png" alt="Google Icon" className='img-google' onClick={handleGoogleLogin}></img>Gmail</button>
+                    <button className='boton-google' onClick={handleGoogleLogin}><img src="/gmail.png" alt="Google Icon" className='img-google'></img>Gmail</button>
                     <button className='boton-apple'><img src="/apple-logo.png" alt="Apple Icon" className='img-apple'></img>Apple</button>
                 </div>
 
