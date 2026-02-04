@@ -1,7 +1,6 @@
-
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '/src/styles/main-pages.css';
+import '/src/styles/index.css';
 
 
 export function Splash() {
@@ -10,10 +9,10 @@ export function Splash() {
 
     useEffect(() => {
 
-        const seenSplash= localStorage.getItem('splash'); 
-        if(seenSplash){
-            navigate('login'); 
-            return; 
+        const seenSplash = localStorage.getItem('splash');
+        if (seenSplash == 'true') {
+            navigate('/login', { replace: true });
+            return;
         }
 
         const timer = setTimeout(() => {
@@ -25,14 +24,16 @@ export function Splash() {
 
     return (
         <>
-            <div className="div1-splash">
-                <header className="header-splash">
-                    <div className="div2-splash">
-                        <img className="img-splash" src="/logo-negro.png" alt="Logo negro" />
-                        <strong className="crossneuron-splash">Crossneuron</strong>
-                        <span className="trainer-splash">Entrena tu mente</span>
-                    </div>
-                </header>
+            <div className='splash-page'>
+                <div className="div1-splash">
+                    <header className="header-splash">
+                        <div className="div2-splash">
+                            <img className="img-splash" src="/logo-negro.png" alt="Logo negro" />
+                            <strong className="crossneuron-splash">Crossneuron</strong>
+                            <span className="trainer-splash">Entrena tu mente</span>
+                        </div>
+                    </header>
+                </div>
             </div>
         </>
     )
