@@ -1,9 +1,9 @@
 import { getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
 import '/src/styles/home.css'
-import HeroCarrousel from "../components/HeroCarrousel";
-import CategoryCard from "../components/CategoryCard"; 
-import BottomNavigation from "../components/BottomNavigation"; 
+import HeroCarrousel from "../components/ui/HeroCarrousel";
+import CategoryCard from "../components/ui/CategoryCard"; 
+import BottomNavigation from "../components/ui/BottomNavigation"; 
 import { Brain, Target, Heart, Zap } from "lucide-react" 
 
 export function Home() {
@@ -13,7 +13,7 @@ export function Home() {
     useEffect(() => {
         const auth = getAuth();
         const user = auth.currentUser;
-
+        
         if (user) {
             setUsername(user.displayName || user.email);
         }
