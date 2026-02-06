@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { Timer } from "../components/game1/Timer"
-import { Score } from "../components/game1/Score"
 import { Shape } from "../components/game1/Shapes"
 import { useNavigate } from "react-router-dom";
 import { Pause, Play, LogOut } from "lucide-react"; 
-import "/src/styles/game1.css"
+import "/src/styles/game1-2.css"
 
 const SHAPES = ["circle", "square", "triangle", "star", "hexagon"];
 const GAME_DURATION = 30;
@@ -162,7 +161,7 @@ export const Game1 = () => {
                         <div className="gameover-card">
                             <h2 className="gameover-title">Juego Terminado!</h2>
                             <p className="gameover-score">{score}</p>
-                            <p className="gameover-label">puntos</p>
+                            <p className="gameover-label">Puntos</p>
                             <button onClick={startGame} className="restart-button">Jugar de Nuevo</button>
                         </div>
                     </div>

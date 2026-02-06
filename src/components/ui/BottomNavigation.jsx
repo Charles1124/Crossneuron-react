@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/react-in-jsx-scope */
 import { Home, Gamepad2, BookOpen, User } from "lucide-react"; 
 import { useNavigate, useLocation } from "react-router-dom"
 

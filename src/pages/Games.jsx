@@ -1,4 +1,5 @@
-import { Shapes, Palette, Workflow} from "lucide-react"
+/* eslint-disable react/react-in-jsx-scope */
+import { Shapes, Palette, Workflow, Settings} from "lucide-react"
 import CategoryCard from "../components/ui/CategoryCard"
 import BottomNavigation from "../components/ui/BottomNavigation" 
 import "/src/styles/games.css" 
@@ -6,7 +7,7 @@ import { useNavigate } from "react-router-dom"
 
 export function Games (){
 
-    const navigate= useNavigate(); 
+    const navigate= useNavigate();  
 
     return(
         <div className="games-page">
@@ -38,7 +39,7 @@ export function Games (){
                         onClick={() => navigate("/game2")}
                         /> 
                         <CategoryCard
-                        icon= {Shapes}
+                        icon= {Workflow}
                         title= "Patrón"
                         description= "Siga el patrón y elija la pelota correcta"
                         color= "calm"

@@ -1,4 +1,4 @@
-import '/src/styles/game1.css';
+import '/src/styles/game1-2.css';
 
 export const Timer= ({ label, time, maxTime, variant= "game"}) => {
     const percent= (time/maxTime) * 100; 

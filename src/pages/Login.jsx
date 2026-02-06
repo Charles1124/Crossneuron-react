@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/react-in-jsx-scope */
 import { useLocation, useNavigate } from 'react-router-dom';
 import '/src/styles/index.css'
 import { useEffect, useState } from 'react';
@@ -43,7 +45,7 @@ export function Login() {
 
             navigate('/home');
             alert(`Bienvenido ${user.displayName}`);
-        } catch (err) {
+        } catch (error) {
             setError('Error al iniciar sesión. Por favor, verifique sus credenciales.');
         } finally {
             setLoading(false);

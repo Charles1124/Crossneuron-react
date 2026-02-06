@@ -1,25 +1,28 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/react-in-jsx-scope */
 import { useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "/src/styles/game1.css";
-import { Pause, Play, LogOut } from "lucide-react";
+import { useNavigate } from "react-router-dom"; 
+import "/src/styles/game1-2.css";
+import { Pause, Play, LogOut, Settings } from "lucide-react";
 
 export const Game2 = () => {
 
-    const TIEMPO_JUEGO = 20;
-    const TIEMPO_RONDA = 5;
-    const TIEMPO_INTERVALO = 3;
-
     const navigate = useNavigate();
+
+    const [configGameTime, setConfigGameTime] = useState(20);
+    const [configRoundTime, setConfigRoundTime] = useState(5);
+    const [configIntervalTime, setConfigIntervalTime] = useState(5);
 
     const [isPaused, setPaused] = useState(false);
     const [currentColor, setCurrentColor] = useState("black");
-    const [isInterval, setIsInterval] = useState(false)
-    const [gameTime, setGameTime] = useState(TIEMPO_JUEGO);
-    const [roundTime, setRoundTime] = useState(TIEMPO_RONDA);
-    const [intervalTime, setIntervalTime] = useState(TIEMPO_INTERVALO);
+    const [isInterval, setIsInterval] = useState(false);
+    const [gameTime, setGameTime] = useState(configGameTime);
+    const [roundTime, setRoundTime] = useState(configRoundTime);
+    const [intervalTime, setIntervalTime] = useState(configIntervalTime);
     const [isPlaying, setisPlaying] = useState(false);
-    const [countdown, setCountdown]= useState(5);
+    const [countdown, setCountdown] = useState(10);
     const [gameOver, setGameOver] = useState(false);
+    const [settingsOpen, setSettingsOpen] = useState(false);
     const [showCountdown, setShowCountdown] = useState(true);
 
     const colores = [
@@ -36,17 +39,18 @@ export const Game2 = () => {
     const generarNuevaRonda = useCallback(() => {
         setIsInterval(false);
         setCurrentColor(getRandomColor);
-        setRoundTime(TIEMPO_RONDA);
-        setIntervalTime(TIEMPO_INTERVALO);
-    }, []);
+        setRoundTime(configRoundTime);
+        setIntervalTime(configIntervalTime);
+    }, [configRoundTime, configIntervalTime]);
 
     const startGame = () => {
         setIsInterval(false);
-        setGameTime(TIEMPO_JUEGO);
+        setGameTime(configGameTime);
+        setRoundTime(configRoundTime)
         setisPlaying(true)
         setGameOver(false)
         setCurrentColor(getRandomColor);
-        setRoundTime(TIEMPO_RONDA);
+        setIntervalTime(configIntervalTime);
     }
 
     const togglePause = () => {
@@ -57,25 +61,27 @@ export const Game2 = () => {
         navigate('/games');
     }
 
-    const resetGame = () => {
-        setCountdown(5);
-        setShowCountdown(true);
-        setGameOver(false);
-    };
+    const toggleSettings = () => {
+        setSettingsOpen(!settingsOpen);
+    }
 
     useEffect(() => {
         if (showCountdown && !gameOver) {
-            if (countdown > 0) {
-                const timer = setTimeout(() => {
-                    setCountdown(countdown - 1);
-                }, 1000);
-                return () => clearTimeout(timer);
+            if (settingsOpen === false) {
+                if (countdown > 0) {
+                    const timer = setTimeout(() => {
+                        setCountdown(countdown - 1);
+                    }, 1000);
+                    return () => clearTimeout(timer);
+                } else {
+                    setShowCountdown(false);
+                    startGame();
+                }
             } else {
-                setShowCountdown(false);
-                startGame();
+                return;
             }
         }
-    }, [countdown, showCountdown, gameOver]);
+    }, [countdown, showCountdown, gameOver, settingsOpen]);
 
     useEffect(() => {
         if (!isPlaying || isPaused) return;
@@ -101,13 +107,13 @@ export const Game2 = () => {
             setIntervalTime((prev) => {
                 if (prev <= 0.1) {
                     generarNuevaRonda();
-                    return TIEMPO_INTERVALO;
+                    return configIntervalTime;
                 }
                 return prev - 0.1;
             });
         }, 100);
         return () => clearInterval(gameInterval);
-    }, [isPlaying, isPaused, isInterval, generarNuevaRonda]);
+    }, [isPlaying, isPaused, isInterval, generarNuevaRonda, configIntervalTime]);
 
     useEffect(() => {
         if (!isPlaying || isPaused || isInterval) return;
@@ -117,13 +123,19 @@ export const Game2 = () => {
                 if (prev <= 0.1) {
                     setIsInterval(true);
                     setCurrentColor("black");
-                    return TIEMPO_RONDA
+                    return configRoundTime;
                 }
                 return prev - 0.1;
             });
         }, 100);
         return () => clearInterval(roundInterval);
-    }, [isPlaying, isPaused, isInterval])
+    }, [isPlaying, isPaused, isInterval, configRoundTime])
+
+    useEffect(() => {
+        if (isPlaying || gameOver) {
+            setSettingsOpen(false);
+        }
+    }, [isPlaying, gameOver]);
 
     return (
         <div className="game2-container" style={{
@@ -133,20 +145,23 @@ export const Game2 = () => {
                 {isPlaying && !gameOver && (
                     <button onClick={togglePause} className="action-button pause-button">{isPaused ? <Play size={20} /> : <Pause size={20} />}</button>
                 )}
+                {!(isPlaying && !gameOver) && (
+                    <button onClick={toggleSettings} className="action-button settings-button"><Settings size={20} /></button>
+                )}
                 <button onClick={handleLeave} className="action-button leave-button">
                     <LogOut size={20} />
                 </button>
             </div>
 
             {showCountdown && !gameOver && (
-                    <div className="countdown-screen">
-                        <div className="countdown-content">
-                            <h2 className="countdown-title">Ejercicio de Colores</h2>
-                            <p className="countdown-subtitle">Memoriza los colores</p>
-                            <div className="countdown-number">{countdown}</div>
-                        </div>
+                <div className="countdown-screen">
+                    <div className="countdown-content">
+                        <h2 className="countdown-title">Ejercicio de Colores</h2>
+                        <p className="countdown-subtitle">Memoriza los colores</p>
+                        <div className="countdown-number">{countdown}</div>
                     </div>
-                )}
+                </div>
+            )}
 
             {isPaused && isPlaying && !gameOver && (
                 <div className="pause-overlay">
@@ -157,6 +172,24 @@ export const Game2 = () => {
                         </button>
                     </div>
                 </div>
+            )}
+
+            {settingsOpen && !(isPlaying && !gameOver) && (
+                <div className="settings-overlay">
+                    <div className="settings-card">
+                        <h2>Configure los tiempos</h2>
+                        <input className="input-game-time" type="number" min="10" max="999" placeholder="Segundos del juego" value={configGameTime}
+                            onChange={(e) => setConfigGameTime(Number(e.target.value))}></input>
+                        <input type="number" className="input-round-time" min="1" max="99" placeholder="Segundos por color" value={configRoundTime}
+                            onChange={(e) => setConfigRoundTime(Number(e.target.value))}></input>
+                        <input type="number" className="input-intervañ-time" min="1" max="99" placeholder="Segundos por intervalo" value={configIntervalTime}
+                            onChange={(e) => setConfigIntervalTime(Number(e.target.value))}></input>
+                        <button onClick={toggleSettings} className="close-settings">
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+
             )}
 
 

@@ -1,4 +1,4 @@
-import '/src/styles/game1.css';
+import '/src/styles/game1-2.css';
 
 export const Shape = ({ type, className = "", onClick }) => {
 

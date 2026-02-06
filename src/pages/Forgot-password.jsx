@@ -1,3 +1,5 @@
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable no-unused-vars */
 import { useNavigate } from 'react-router-dom';
 import '/src/styles/index.css';
 import { useState } from 'react';
@@ -30,7 +32,7 @@ export function ForgotPassword() {
             setError("Si el usuario existe, se enviará un correo de recuperación.")
 
         } catch (error) {
-            setError(err);
+            setError(error);
         } finally {
             setLoading(false);
         }

@@ -51,6 +51,15 @@
   cursor: pointer;
 } 
 
+.settings-button{
+  background-color: hsl(0, 0%, 41%);
+  color: white; 
+  border: none;
+  border-radius: 8px;
+  padding: 5px; 
+  cursor: pointer;
+}
+
 .game1-header p{
   font-size: 0.875rem;
   color: hsl(215, 16%, 47%);
@@ -114,6 +123,21 @@
   animation: fadeIn 0.2s ease;
 }
 
+.settings-overlay{
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0; 
+  background-color: hsla(222, 47%, 11%, 0.8);
+  align-items: center;
+  display: flex;
+  justify-content: center ;
+  z-index: 60;
+  animation: fadeIn 0.2s ease;
+  
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -129,6 +153,18 @@
   padding: 2.5rem 2rem;
   text-align: center;
   box-shadow: 0 8px 24px hsla(0, 0%, 0%, 0.3);
+} 
+
+.settings-card{
+  background-color: hsl(0, 0%, 100%);
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  text-align: center; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 8px 24px hsla(0, 0%, 0%, 0.3);
 }
 
 .pause-card h2 {
@@ -138,8 +174,35 @@
   margin-bottom: 1.5rem;
 }
 
+.settings-card h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: hsl(222, 47%, 11%);
+  margin-bottom: 1.5rem;
+}
+
+
+.settings-card input{
+  border-radius: 8px;
+  padding: 7px;
+  width: 70%;
+}
+
 .resume-button {
   background: linear-gradient(135deg, hsl(221, 83%, 53%) 0%, hsl(245, 75%, 60%) 100%);
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 600;
+  padding: 1rem 2.5rem;
+  border-radius: 1rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 16px hsla(221, 83%, 53%, 0.3);
+  transition: transform 0.2s;
+}
+
+.close-settings {
+  background: linear-gradient(135deg, hsl(0, 83%, 53%) 0%, hsla(0, 75%, 60%, 0.863) 100%);
   color: white;
   font-size: 1.125rem;
   font-weight: 600;

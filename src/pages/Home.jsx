@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
 import '/src/styles/home.css'

@@ -1,6 +1,8 @@
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/prop-types */
 import '/src/styles/home.css'
 
-const CategoryCard = ({ icon: Icon, title, description, color, delay = 0, onClick}) => {
+const CategoryCard = ({ icon: Icon, title, description, color, delay = 0, onClick, onSettings}) => {
     return (
         <div className="category-card" style={{ animationDelay: `${delay}ms` }} onClick={onClick}>
             <div className={`category-icon-wrapper ${color}`}>
