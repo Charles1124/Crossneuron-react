@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { Shapes, Palette, Workflow, Settings} from "lucide-react"
+import { Shapes, Palette, Workflow} from "lucide-react"
 import CategoryCard from "../components/ui/CategoryCard"
 import BottomNavigation from "../components/ui/BottomNavigation" 
 import "/src/styles/games.css" 
@@ -43,7 +43,8 @@ export function Games (){
                         title= "Patrón"
                         description= "Siga el patrón y elija la pelota correcta"
                         color= "calm"
-                        delay={200}
+                        delay={200} 
+                        onClick={() => navigate("/game3")}
                         /> 
                     </div>
                 </section>
